@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WELCOME TO GRADEPREDICT</title>
+    <style>
+        /* Basic reset and container styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center items vertically */
+            min-height: 100vh; /* Ensure the body takes up the full height */
+            position: relative;
+            overflow: hidden; /* Hide overflow for cursor effect */
+            background-color: #f4f4f4; /* Light background color */
+        }
+
+        .container {
+            text-align: center;
+            margin: 20px; /* Add margin from the top */
+            position: relative; /* Position relative for button positioning */
+        }
+
+        h2 {
+            font-size: 48px; /* Larger font size for heading */
+            margin: 0; /* Remove default margin */
+            margin-bottom: 10px; /* Space below heading */
+            color: rgb(4, 37, 73); /* Change text color */
+        }
+
+        /* Navigation text container */
+        .nav-buttons {
+            margin-top: 10px; /* Space above navigation */
+        }
+
+        /* Individual navigation text */
+        .nav-button {
+            display: inline-block;
+            color: rgb(4, 37, 73); /* Blue text */
+            padding: 5px 15px; /* Adjust padding */
+            text-decoration: none; /* Remove underline */
+            font-size: 24px; /* Font size */
+            font-weight: bold; /* Make text bold */
+            margin: 0 15px; /* Space between text */
+            transition: font-size 0.3s ease, color 0.3s ease; /* Smooth transition for font size and color */
+        }
+
+        /* Navigation text hover effect */
+        .nav-button:hover {
+            text-decoration: wavy; /* Underline text on hover */
+            font-size: 19px; /* Increase font size on hover */
+        }
+
+        .logo {
+            width: 450px; /* Adjust logo size */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space below the logo for button placement */
+        }
+
+        /* Big button styles */
+        .big-button {
+            display: block;
+            width: 70px; /* Set a fixed width for the button */
+            background-color: rgb(4, 37, 73); /* Background color */
+            color: white; /* White text */
+            padding: 15px; /* Adjust padding for button size */
+            text-align: center;
+            text-decoration: none; /* Remove underline */
+            font-size: 20px; /* Larger font size */
+            font-weight: bold; /* Make text bold */
+            border-radius: 50px; /* Curved corners */
+            border: none; /* Remove border */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and box-shadow */
+            position: absolute;
+            right: 20px; /* Position the button to the right side */
+            top: 100%; /* Position the button directly below the container */
+            transform: translateY(10px); /* Add a small vertical offset */
+        }
+
+        /* Big button hover effect */
+        .big-button:hover {
+            transform: scale(1.05) translateY(10px); /* Slightly enlarge button on hover and keep vertical offset */
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3); /* Add shadow to pop out */
+        }
+
+        /* Bubble effect styles */
+        .bubble {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(13, 13, 13, 0.6);
+            pointer-events: none;
+            transform: scale(0);
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main content -->
+    <div class="container">
+        <h2>WELCOME TO GRADEPREDICT</h2>
+        
+        <!-- Navigation text below the heading -->
+        <div class="nav-buttons">
+            <a href="{{ url_for('student_info') }}" class="nav-button">Prediction</a>
+            <a href="{{ url_for('study_mat') }}" class="nav-button">Study Materials</a>
+            <a href="{{ url_for('tips') }}" class="nav-button">Tips</a>
+        </div>
+        
+        <img src="{{ url_for('static', filename='images/PHOTO-2024-08-01-23-43-24-removebg-preview.png') }}" alt="Logo" class="logo">
+        
+        <!-- Full-width button positioned to the right side -->
+        <a href="{{ url_for('student_info') }}" class="big-button">Next</a>
+    </div>
+    
+    <!-- Bubble effects -->
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            // Create bubble effect
+            for (let i = 0; i < 5; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                bubble.style.left = `${e.pageX - 7.5}px`;
+                bubble.style.top = `${e.pageY - 7.5}px`;
+                document.body.appendChild(bubble);
+
+                // Animate and remove bubble
+                setTimeout(() => {
+                    bubble.style.transform = 'scale(1)';
+                    bubble.style.opacity = '0';
+                }, 0);
+
+                setTimeout(() => {
+                    bubble.remove();
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>

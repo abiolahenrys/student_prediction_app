@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Predict</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Hide overflow for bubble effect */
+        }
+        .container {
+            background: white;
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+            position: relative; /* For absolute positioning of bubbles */
+        }
+        h1 {
+            color: rgb(4, 37, 73);
+            font-size: 28px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 30px; /* Adjusted gap between columns and rows */
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            margin-bottom: 10px; /* Added margin to separate the input fields */
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: rgb(4, 37, 73);
+            outline: none;
+        }
+        .buttons {
+            grid-column: span 2;
+            display: flex;
+            justify-content: flex-end; /* Align buttons to the right */
+            gap: 10px; /* Space between buttons */
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button[type="reset"] {
+            background-color: rgb(123, 127, 131);
+            color: white;
+        }
+        button[type="submit"] {
+            background-color: rgb(4, 37, 73);
+            color: white;
+        }
+        .nav-button {
+            background-color: rgb(4, 37, 73);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover, .nav-button:hover {
+            transform: scale(1.05);
+        }
+        .link-container {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .link {
+            font-size: 14px;
+        }
+        .link a {
+            color: rgb(4, 37, 73);
+            text-decoration: none;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
+        .bubble {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(8, 8, 8, 0.6);
+            pointer-events: none;
+            transform: scale(0);
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const fields = [
+                'grade_avg', 'failures', 'romantic_relationship', 
+                'family_relationship', 'studytime', 'health', 
+                'fathers_education', 'mothers_education', 
+                'free_time', 'travel_time', 'go_out'
+            ];
+
+            for (let field of fields) {
+                let value = document.getElementById(field).value;
+
+                if (value === "") {
+                    alert("Please fill all the fields.");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        document.addEventListener('mousemove', function(e) {
+            for (let i = 0; i < 5; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                bubble.style.left = `${e.pageX - 7.5}px`;
+                bubble.style.top = `${e.pageY - 7.5}px`;
+                document.body.appendChild(bubble);
+
+                setTimeout(() => {
+                    bubble.style.transform = 'scale(1)';
+                    bubble.style.opacity = '0';
+                }, 0);
+
+                setTimeout(() => {
+                    bubble.remove();
+                }, 500);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>STUDENT INFORMATION</h1>
+        <form action="{{ url_for('predict') }}" method="post" onsubmit="return validateForm()">
+            <div>
+                <label for="grade_avg">Grade Average</label>
+                <input type="number" id="grade_avg" name="grade_avg" step="0.0000001" required>
+            </div>
+            <div>
+                <label for="failures">Past Failures</label>
+                <input type="number" id="failures" name="failures" min="0" max="4" required>
+            </div>
+            <div>
+                <label for="romantic_relationship">Romantic Relationship</label>
+                <input type="number" id="romantic_relationship" name="romantic_relationship" min="0" max="1" required>
+            </div>
+            <div>
+                <label for="family_relationship">Family Relationship</label>
+                <input type="number" id="family_relationship" name="family_relationship" min="1" max="5" required>
+            </div>
+            <div>
+                <label for="studytime">Study Time</label>
+                <input type="number" id="studytime" name="studytime" min="1" max="4" required>
+            </div>
+            <div>
+                <label for="health">Health</label>
+                <input type="number" id="health" name="health" min="0" max="4" required>
+            </div>
+            <div>
+                <label for="fathers_education">Father's Education Level</label>
+                <input type="number" id="fathers_education" name="fathers_education" min="1" max="5" required>
+            </div>
+            <div>
+                <label for="mothers_education">Mother's Education Level</label>
+                <input type="number" id="mothers_education" name="mothers_education" min="1" max="5" required>
+            </div>
+            <div>
+                <label for="free_time">Free Time</label>
+                <input type="number" id="free_time" name="free_time" min="1" max="5" required>
+            </div>
+            <div>
+                <label for="travel_time">Travel Time</label>
+                <input type="number" id="travel_time" name="travel_time" min="1" max="4" required>
+            </div>
+            <div>
+                <label for="go_out">Go Out</label>
+                <input type="number" id="go_out" name="go_out" min="1" max="5" required>
+            </div>
+            <div class="buttons">
+                <a href="{{ url_for('index') }}" class="nav-button">HomePage</a>
+                <button type="submit">Predict Grade</button>
+            </div>
+            <div class="link-container">
+                <button type="reset">Clear All</button>
+                <div class="link">
+                    <p>For more information on input values, check the <a href="{{ url_for('guideline') }}">Guidelines</a>.</p>
+                </div>
+            </div>
+        </form>
+    </div>    
+</body>
+</html>

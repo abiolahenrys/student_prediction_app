@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Topics</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: black;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .topic-card {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .topic-card iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .topic-card .title {
+            padding: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .topic-card:hover {
+            transform: scale(1.05);
+            background-color: rgb(4, 37, 73);
+        }
+
+        .topic-card:hover .title {
+            color: white;
+        }
+
+        .quiz-link-container {
+            text-align: center;
+            margin-top: 30px; /* Adjust margin to separate it from the grid */
+        }
+
+        .quiz-link {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 150px; /* Width and height set to make it a circle */
+            height: 150px;
+            background-color: rgb(4, 37, 73);
+            border-radius: 50%;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .quiz-link:hover {
+            transform: scale(1.1);
+            background-color: #a9acb0;
+            color: white;
+        }
+
+        .back-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button a {
+            padding: 10px 20px;
+            text-align: center;
+            background-color: rgb(4, 37, 73);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button a:hover {
+            background-color: #a9acb0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="subject-title">Subject Topics</h1>
+        <div class="grid" id="topics-grid">
+            <!-- Dynamic content will be injected here based on the selected subject -->
+        </div>
+        <div class="quiz-link-container" id="quiz-link-container">
+            <!-- Quiz link will be injected here if it exists -->
+        </div>
+        <div class="back-button">
+            <a href="{{ url_for('study_mat') }}">Back</a>
+        </div>
+    </div>
+    <script>
+        // JavaScript to dynamically load topics based on the subject
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const subject = params.get('subject');
+            const subjectTitle = document.getElementById('subject-title');
+            const topicsGrid = document.getElementById('topics-grid');
+            const quizLinkContainer = document.getElementById('quiz-link-container');
+
+            // Capitalize the first letter of the subject
+            if (subject) {
+                subjectTitle.textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
+
+                const topics = {
+                    physics: [
+                        { title: 'Kinematics', videoId: '8dkE33JjNYA' },
+                        { title: 'Dynamics', videoId: 'V7WOSxvkagc' },
+                        { title: 'Thermodynamics', videoId: 'TnDCxw0y6YM' },
+                        { title: 'Electromagnetism', videoId: 'xAtS7BWykHU' },
+                        { title: 'Optics', videoId: 'yMO7Lsjhmi4' },
+                        { title: 'Quiz', link: 'https://www.proprofs.com/quiz-school/topic/physics' }
+                    ],
+                    chemistry: [
+                        { title: 'Chemical Bonding', videoId: 'S_k0kr2eZSQ' },
+                        { title: 'Periodic Table Trends', videoId: 'okolv1y6IlE' },
+                        { title: 'Acids and Bases', videoId: 'FM2MpMbV0rw' },
+                        { title: 'Organic Chemistry Basics', videoId: 'B_ketdzJtY8' },
+                        { title: 'Thermochemistry', videoId: 'LsqKL3pBVMA' },
+                        { title: 'Quiz', link: 'https://www.proprofs.com/quiz-school/topic/chemistry' }
+                    ],
+                    biology: [
+                        { title: 'Cellular Respiration', videoId: 'd9hffYCwfEA' },
+                        { title: 'The Plasma Membrane', videoId: 'xQjzPZZ4olE' },
+                        { title: 'Photosynthesis', videoId: 'D2Y_eEaxrYo' },
+                        { title: 'Energy of a Cell', videoId: 'rrFi7GWt_GY' },
+                        { title: 'Principles of Ecology', videoId: 'WCfiYYSCT-U' },
+                        { title: 'Quiz', link: 'https://www.proprofs.com/quiz-school/topic/biology' }
+                    ],
+                    mathematics: [
+                        { title: 'Algebra', videoId: 'grnP3mduZkM' },
+                        { title: 'Calculus', videoId: 'WsQQvHm4lSw' },
+                        { title: 'Probability and Statistics', videoId: 'SkidyDQuupA' },
+                        { title: 'Geometry Concepts', videoId: '302eJ3TzJQU' },
+                        { title: 'Linear Algebra Introduction', videoId: 'Ft2_QtXAnh8' },
+                        { title: 'Quiz', link: 'https://www.proprofs.com/quiz-school/topic/general-science' }
+                    ],
+                    english: [
+                        { title: 'Grammar Basics', videoId: 'PZvqsyS-mRg' },
+                        { title: 'Essay Writing Techniques', videoId: 'GNL1_tNTqpw' },
+                        { title: 'Literary Devices', videoId: 'OY2zPFQsKSI' },
+                        { title: 'Poetry Analysis', videoId: 'o3x-g5qRCYw' },
+                        { title: 'Critical Reading Skills', videoId: 'jJPea7Ogy6w' },
+                        { title: 'Quiz', link: 'https://testyourlanguage.com/english-quiz?utm_content=cmp-true' }
+                    ],
+                    'general-science': [
+                        { title: 'Introduction to Science', videoId: '9j1ADT9S5rI' },
+                        { title: 'Scientific Method', videoId: 'xOLcZMw0hd4' },
+                        { title: 'Basic Physics Concepts', videoId: 'ZAqIoDhornk' },
+                        { title: 'Introduction to Chemistry', videoId: '5iTOphGnCtg' },
+                        { title: 'Biological Systems Overview', videoId: 'EtWknf1gzKo' },
+                        { title: 'Quiz', link: 'https://www.proprofs.com/quiz-school/topic/general-science' } // Quiz link
+                    ],
+                    literature: [
+                        { title: 'Shakespearean Plays', videoId: '7SCA5hIwkbg' },
+                        { title: 'Literary Genres', videoId: 'oarGRayak5o' },
+                        { title: 'Character Analysis', videoId: 'NRhteCMgYoU' },
+                        { title: 'Understanding Themes', videoId: 'MAu3e5GZo4k' },
+                        { title: 'Writing Style and Techniques', videoId: 'RSoRzTtwgP4' },
+                        { title: 'Quiz', link: 'https://quiz-everyday.com/english-and-literature/english-literature-trivia-quiz' }
+                    ]
+                };
+
+                if (topics[subject]) {
+                    topics[subject].forEach(topic => {
+                        if (topic.videoId) {
+                            const card = document.createElement('div');
+                            card.className = 'topic-card';
+                            card.innerHTML = `
+                                <iframe src="https://www.youtube.com/embed/${topic.videoId}" allowfullscreen></iframe>
+                                <div class="title">${topic.title}</div>
+                            `;
+                            topicsGrid.appendChild(card);
+                        } else if (topic.link) {
+                            const quizLink = document.createElement('a');
+                            quizLink.href = topic.link;
+                            quizLink.target = "_blank";
+                            quizLink.className = 'quiz-link';
+                            quizLink.textContent = topic.title;
+                            quizLinkContainer.appendChild(quizLink);
+                        }
+                    });
+                } else {
+                    topicsGrid.innerHTML = '<p>No topics available for this subject.</p>';
+                }
+            } else {
+                subjectTitle.textContent = 'No subject selected';
+                topicsGrid.innerHTML = '<p>Please select a subject to view topics.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

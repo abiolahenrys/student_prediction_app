@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Guidelines</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fafbfc;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .guidelines-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
+            overflow-y: auto; /* Allow vertical scrolling if content overflows */
+            max-height: 90vh; /* Ensure container doesn’t exceed viewport height */
+        }
+        h1 {
+            color: rgb(4, 37, 73);
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #eff2f5;
+            padding-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .guideline-item {
+            background-color: #f7f7f7;
+            border-left: 5px solid rgb(4, 37, 73);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: rgb(4, 37, 73);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .back-link a:hover {
+            color: #56595b;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="guidelines-container">
+        <h1>Input Guidelines</h1>
+        <div class="guideline-item">
+            <p><strong>Past Failures:</strong> 0-4</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Romantic Relationship:</strong><br>0 = No<br>1 = Yes</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Family Relationship:</strong><br>1 = Very bad<br>2 = Bad<br>3 = Average<br>4 = Good<br>5 = Excellent</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Study Time:</strong><br>1 = Less than two hours<br>2 = Two to five hours<br>3 = Five to ten hours<br>4 = More than ten hours</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Health:</strong><br>0 = Very bad<br>1 = Bad<br>2 = Average<br>3 = Good<br>4 = Very good</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Father’s Education:</strong><br>1 = No education<br>2 = Primary education<br>3 = Secondary education<br>4 = Tertiary education<br>5 = Postgraduate education</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Mother’s Education:</strong><br>1 = No education<br>2 = Primary education<br>3 = Secondary education<br>4 = Tertiary education<br>5 = Postgraduate education</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Free Time:</strong><br>1 = Very low<br>2 = Low<br>3 = Average<br>4 = High<br>5 = Very high</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Travel Time:</strong><br>1 = Less than 15 minutes<br>2 = 15 to 30 minutes<br>3 = 30 minutes to 1 hour<br>4 = More than 1 hour</p>
+        </div>
+        <div class="guideline-item">
+            <p><strong>Go Out:</strong><br>1 = Very low<br>2 = Low<br>3 = Average<br>4 = High<br>5 = Very high</p>
+        </div>
+        <div class="back-link">
+            <p><a href="{{ url_for('student_info') }}">Back to Form</a></p>
+        </div>
+    </div>
+</body>
+</html>

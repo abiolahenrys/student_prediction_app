@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tips</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 30px;
+            color: rgb(4, 37, 73);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .header h2 {
+            font-size: 32px;
+            color: rgb(4, 37, 73);
+            font-weight: normal;
+        }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px; /* Added margin-bottom to create space below the grid */
+        }
+        .tip {
+            display: flex;
+            align-items: flex-start;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .tip-icon {
+            background-color: rgb(4, 37, 73);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+            color: white;
+        }
+        .tip-text {
+            text-align: left;
+        }
+        .tip-text h3 {
+            font-size: 18px;
+            color: rgb(4, 37, 73);
+            margin: 0 0 10px;
+        }
+        .tip-text p {
+            font-size: 14px;
+            color: #333;
+            margin: 0;
+        }
+        .home-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: rgb(4, 37, 73);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .home-button:hover {
+            background-color: rgb(218, 221, 225);
+            transform: scale(1.05);
+            color: #333;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Study Tips</h1>
+        </div>
+        <div class="tips-grid">
+            <div class="tip">
+                <div class="tip-icon">📝</div>
+                <div class="tip-text">
+                    <h3>Create a study schedule</h3>
+                    <p>Allocate time for each subject to ensure balanced learning.</p>
+                </div>
+            </div>
+            <div class="tip">
+                <div class="tip-icon">⏰</div>
+                <div class="tip-text">
+                    <h3>Incorporate short breaks</h3>
+                    <p>Take short breaks in your study sessions to avoid burnout.</p>
+                </div>
+            </div>
+            <div class="tip">
+                <div class="tip-icon">💤</div>
+                <div class="tip-text">
+                    <h3>Get enough sleep</h3>
+                    <p>Ensure you get 7-9 hours of sleep every day for better concentration.</p>
+                </div>
+            </div>
+            <div class="tip">
+                <div class="tip-icon">🍎</div>
+                <div class="tip-text">
+                    <h3>Balanced meals and exercise</h3>
+                    <p>Good nutrition and regular exercise enhance academic performance.</p>
+                </div>
+            </div>
+            <div class="tip">
+                <div class="tip-icon">📚</div>
+                <div class="tip-text">
+                    <h3>Use online study materials</h3>
+                    <p>Dive into detailed content for a better understanding of subjects.</p>
+                </div>
+            </div>
+            <div class="tip">
+                <div class="tip-icon">🏆</div>
+                <div class="tip-text">
+                    <h3>Set achievable goals</h3>
+                    <p>Set small, achievable goals and reward yourself for reaching them.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Home button with added margin -->
+        <a href="{{ url_for('index') }}" class="home-button">HomePage</a>
+    </div>
+</body>
+</html>

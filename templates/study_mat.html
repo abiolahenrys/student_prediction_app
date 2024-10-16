@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Materials</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: rgb(4, 37, 73);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .subject-card {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none; /* Ensure links don't have underline */
+        }
+
+        .subject-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .subject-card .title {
+            padding: 10px;
+            font-size: 18px;
+            color: rgb(4, 37, 73);
+        }
+
+        .subject-card:hover {
+            transform: scale(1.05);
+            background-color: rgb(4, 37, 73);
+        }
+
+        .subject-card:hover .title {
+            color: white;
+        }
+
+        .back-button {
+            grid-column: span 3; /* Span all columns */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px; /* Add some space above the button */
+        }
+
+        .back-button a {
+            padding: 10px 20px;
+            text-align: center;
+            background-color: rgb(4, 37, 73);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button a:hover {
+            background-color: #a9acb0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Study Materials</h1>
+        <div class="grid">
+            <a href="{{ url_for('subject', subject='physics') }}" class="subject-card">
+                <img src="{{ url_for('static', filename='images/physics.jpeg') }}" alt="Physics">
+                <div class="title">Physics</div>
+            </a>
+            <a href="{{ url_for('subject', subject='chemistry') }}" class="subject-card">
+                <img src="{{ url_for('static', filename='images/chemistry.jpeg') }}" alt="Chemistry">
+                <div class="title">Chemistry</div>
+            </a>
+            <a href="{{ url_for('subject', subject='biology') }}" class="subject-card">
+                <img src="{{ url_for('static', filename='images/biology.jpeg') }}" alt="Biology">
+                <div class="title">Biology</div>
+            </a>
+            <a href="{{ url_for('subject', subject='mathematics') }}" class="subject-card">
+                <img src="{{ url_for('static', filename='images/mathematics.jpeg') }}" alt="Mathematics">
+                <div class="title">Mathematics</div>
+            </a>
+            <a href="{{ url_for('subject', subject='english') }}" class="subject-card">
+                <img src="{{ url_for('static', filename='images/english.jpeg') }}" alt="English">
+                <div class="title">English</div>
+            </a>
+            <a href="{{ url_for('subject', subject='general-science') }}" class="subject-card">
+                <img src="{{ url_for('static', filename='images/general-science.png') }}" alt="General Science">
+                <div class="title">General Science</div>
+            </a>
+            <a href="{{ url_for('subject', subject='literature') }}" class="subject-card">
+                <img src="{{ url_for('static', filename='images/literature.jpeg') }}" alt="Literature">
+                <div class="title">Literature</div>
+            </a>
+            <!-- Back to Home Button -->
+            <div class="back-button">
+                <a href="{{ url_for('index') }}">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Internal styles for this page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        h1 {
+            color: rgb(4, 37, 73);
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+        .progress-circle {
+            position: relative;
+            width: 300px; /* Size of the circle */
+            height: 300px; /* Size of the circle */
+            border-radius: 50%;
+            background: conic-gradient(
+                rgb(4, 37, 73) 0%,
+                rgb(4, 37, 73) 0%,
+                #f0f0f0 0%,
+                #f0f0f0 100%
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 260px; /* Size of the inner circle */
+            height: 260px; /* Size of the inner circle */
+            border-radius: 50%;
+            background-color: #fff;
+            display: block;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .progress-circle span {
+            position: absolute;
+            font-size: 48px; /* Font size of the prediction */
+            color: rgb(4, 37, 73);
+        }
+        p {
+            font-size: 25px;
+            color: rgb(4, 37, 73);
+        }
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: rgb(4, 37, 73);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        a:hover {
+            background-color: rgb(110, 111, 113);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <div class="progress-circle">
+            <!-- Display the prediction rounded to the nearest whole number -->
+            <span>{{ prediction | round(0) }}</span>
+        </div>
+        <p>The predicted grade is: <strong>{{ prediction | round(0) }}</strong></p>
+        <a href="{{ url_for('student_info') }}">Go Back</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the rounded prediction value
+            var predictedGrade = Math.round(parseFloat("{{ prediction }}")); // Parsing and rounding the prediction
+
+            // Calculate the percentage for the progress circle
+            var maxGrade = 20; // Assuming the maximum grade is 20
+            var gradePercentage = (predictedGrade / maxGrade) * 100;
+
+            // Update the background gradient of the progress circle based on the prediction
+            var progressCircle = document.querySelector('.progress-circle');
+            var progressColor = 'rgb(4, 37, 73)'; // Color for the progress
+            progressCircle.style.background = `conic-gradient(${progressColor} 0% ${gradePercentage}%, #f0f0f0 ${gradePercentage}% 100%)`;
+        });
+    </script>
+</body>
+</html>
